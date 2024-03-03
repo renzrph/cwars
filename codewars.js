@@ -15,7 +15,7 @@
 
 // expected output 6
 
-// HIGHEST NUMBER IN AN ARRAY
+// KYU 6 - HIGHEST RANK NUMBER IN AN ARRAY
 
 function highestRank(arr) {
   let counts = {};

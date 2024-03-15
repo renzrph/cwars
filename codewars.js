@@ -17,25 +17,57 @@
 
 // KYU 6 - HIGHEST RANK NUMBER IN AN ARRAY
 
-function highestRank(arr) {
-  let counts = {};
+// function highestRank(arr) {
+//   let counts = {};
 
-  arr.forEach((num) => {
-    counts[num] = (counts[num] || 0) + 1;
-  });
+//   arr.forEach((num) => {
+//     counts[num] = (counts[num] || 0) + 1;
+//   });
 
-  let maxCount = -Infinity;
-  let maxKey = -Infinity;
+//   let maxCount = -Infinity;
+//   let maxKey = -Infinity;
 
-  for (let key in counts) {
-    if (
-      counts[key] > maxCount ||
-      (counts[key] === maxCount && parseInt(key) > parseInt(maxKey))
-    ) {
-      maxCount = counts[key];
-      maxKey = key;
-    }
+//   for (let key in counts) {
+//     if (
+//       counts[key] > maxCount ||
+//       (counts[key] === maxCount && parseInt(key) > parseInt(maxKey))
+//     ) {
+//       maxCount = counts[key];
+//       maxKey = key;
+//     }
+//   }
+
+//   return parseInt(maxKey);
+// }
+
+/* ------------------- POTION CLAS 101 ------------------- */
+class Potion {
+  constructor(color, volume) {
+    this.color = color;
+    this.volume = volume;
   }
 
-  return parseInt(maxKey);
+  mix(otherPotion) {
+    let totalVolume = this.volume + otherPotion.volume;
+
+    let mixedColor = [
+      Math.ceil(
+        (this.color[0] * this.volume +
+          otherPotion.color[0] * otherPotion.volume) /
+          totalVolume
+      ),
+      Math.ceil(
+        (this.color[1] * this.volume +
+          otherPotion.color[1] * otherPotion.volume) /
+          totalVolume
+      ),
+      Math.ceil(
+        (this.color[2] * this.volume +
+          otherPotion.color[2] * otherPotion.volume) /
+          totalVolume
+      ),
+    ];
+
+    return new Potion(mixedColor, totalVolume);
+  }
 }

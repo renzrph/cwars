@@ -74,14 +74,38 @@
 
 /* ------------------- Bubblesort Once ------------------- */
 
-function bubblesortOnce(a) {
-  let result = [...a];
+// function bubblesortOnce(a) {
+//   let result = [...a];
 
-  for (let i = 0; i < result.length; i++) {
-    if (result[i] > result[i + 1]) {
-      [result[i], result[i + 1]] = [result[i + 1], result[i]];
+//   for (let i = 0; i < result.length; i++) {
+//     if (result[i] > result[i + 1]) {
+//       [result[i], result[i + 1]] = [result[i + 1], result[i]];
+//     }
+//   }
+
+//   return result;
+// }
+
+/* ------------------- Count the photos! ------------------- */
+const countPhotos = (road) => {
+  let start = 0;
+  let dot = 0;
+  let photoCount = 0;
+
+  for (let i = 0; i < road.length; i++) {
+    if (road[i] === ">") {
+      start++;
+    }
+
+    if (road[i] === ".") {
+      photoCount += start;
+      dot++;
+    }
+
+    if (road[i] === "<") {
+      photoCount += dot;
     }
   }
 
-  return result;
-}
+  return photoCount;
+};

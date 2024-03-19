@@ -110,42 +110,42 @@ const countPhotos = (road) => {
   return photoCount;
 };
 
-/* ------------------- Compare Versions ------------------- */
-function isFloat(number) {
-  return !Number.isInteger(number);
+/* ------------------- Backspaces in String ------------------- */
+function cleanString(s) {
+  if (s.length === 0) return "";
+
+  let result = [];
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "#") {
+      result.pop();
+    } else {
+      result.push(s[i]);
+    }
+  }
+
+  return result.join("");
 }
 
+/* ------------------- Compare Versions ------------------- */
 function compareVersions(version1, version2) {
-  let v1 = version1.split(",").map((str) => Number(str));
-  let v2 = version2.split(",").map((str) => Number(str));
-  let versions = v1.concat(v2);
-  console.log(versions);
+  let v1 = version1.split(".").map((str) => parseFloat(str));
+  let v2 = version2.split(".").map((str) => parseFloat(str));
+  let maxLength = Math.max(v1.length, v2.length);
 
-  if (versions[0] >= versions[1]) {
-    return true;
-  }
+  for (let i = 0; i < maxLength; i++) {
+    let num1 = v1[i] || 0;
+    let num2 = v2[i] || 0;
 
-  if (isNaN(versions[0]) || isNaN(versions[1])) {
-    return false;
-  }
-
-  if (isFloat(versions[0]) || isFloat(versions[1])) {
-    return false;
-  }
-
-  if (versions[0] === versions[1]) {
-    let subversions1 = version1.split(",").length;
-    let subversions2 = version2.split(",").length;
-
-    if (subversions1 > subversions2) {
+    if (num1 > num2) {
       return true;
-    } else if (subversions1 < subversions2) {
+    } else if (num1 < num2) {
       return false;
     }
   }
+  // If versions are equal
+  return true;
 }
-
-// test cases
 
 // "Testing versions without subversion"
 console.log(compareVersions("11", "10")); // true
@@ -164,20 +164,3 @@ console.log(compareVersions("10.4", "10.10")); // false
 
 // "Adding subversion does not make it larger than a greater version"
 console.log(compareVersions("10.4.9", "10.5")); // false
-
-/* ------------------- Backspaces in String ------------------- */
-function cleanString(s) {
-  if (s.length === 0) return "";
-
-  let result = [];
-
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === "#") {
-      result.pop();
-    } else {
-      result.push(s[i]);
-    }
-  }
-
-  return result.join("");
-}
